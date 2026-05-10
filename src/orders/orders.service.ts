@@ -87,7 +87,7 @@ export class OrdersService {
     await this.prisma.order.update({
       where: { id: order.id },
       data: {
-        paymentId: payment.id,
+        paymentId: String(payment.id),
         paymentMethod: 'fedapay',
       },
     });

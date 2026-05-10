@@ -54,7 +54,7 @@ export class PaymentService {
       console.log('[Fedapay] createPayment response:', JSON.stringify(response.data, null, 2));
       const transaction = response.data['v1/transaction'] ?? response.data;
       return {
-        id: transaction.id,
+        id: String(transaction.id),
         url: transaction.payment_url || transaction.transaction_url || transaction.url,
         status: transaction.status,
       };
