@@ -58,8 +58,9 @@ export class PaymentService {
       };
     } catch (error: any) {
       const status = error?.response?.status;
-      const fedapayMsg = error?.response?.data?.message ?? error?.response?.data ?? error?.message;
-      console.error(`[Fedapay] createPayment failed — HTTP ${status}:`, fedapayMsg);
+      const fullData = error?.response?.data;
+      console.error(`[Fedapay] createPayment failed — HTTP ${status}:`, JSON.stringify(fullData, null, 2));
+      const fedapayMsg = fullData?.message ?? fullData ?? error?.message;
       throw new Error(`Erreur Fedapay (${status ?? 'réseau'}) : ${JSON.stringify(fedapayMsg)}`);
     }
   }
